@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>Dealership Review</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -29,7 +30,7 @@
         </div> 
         {% else %}
         <form action="{% url 'djangoapp:login' %}"  method="post" class="ml-auto">
-            {% csrf_token %}<!--what is this-->
+            {% csrf_token %}<!--Cross Site Request Forgery protection-->
             <input class="" type="text" id="username" name="username" placeholder="UserName:">
             <input type="password" id="pword" name="pword" placeholder="Password:">
             <input class="btn btn-outline-success btn-sm" type="submit" value="Login">
