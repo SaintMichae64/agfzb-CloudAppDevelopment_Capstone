@@ -28,8 +28,8 @@ def about(request):
 
 # Create a `contact` view to return a static contact page
 def contact(request):
-     context = {}
-    if request.method == 'GET':
+    context = {}
+    if request.method == 'GET':                                     
         return render(request, 'djangoapp/contact.html', context)
 
 # Create a `login_request` view to handle sign in request
@@ -101,7 +101,7 @@ def get_dealerships(request):
 
 # Create a `get_dealer_details` view to render the reviews of a dealer
 def get_dealer_details(request, dealer_id):
-      context = {}
+    context = {}
     if request.method == "GET":
         # url = 'add IBMCloud url here...'
         context = {"reviews":  restapis.get_dealer_reviews_by_id_from_cf(url, dealer_id)}
