@@ -27,7 +27,8 @@ DEBUG = True
 
 APPEND_SLASH = True
 
-ALLOWED_HOSTS = ["localhost"]
+# add the IP and * for this to work
+ALLOWED_HOSTS = ['quincy.mybluemix.net', 'localhost', '127.0.0.1', '*']
 
 
 # Application definition

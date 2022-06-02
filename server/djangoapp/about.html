@@ -31,7 +31,7 @@
             </div> 
             {% else %}
             <form action="{% url 'djangoapp:login' %}"  method="post" class="ml-auto">
-                {% csrf_token %}<!--Important do not touch-->
+                {% csrf_token %}<!--CrossSite Scripting Reforgery Protection-->
                 <input class="" type="text" id="username" name="username" placeholder="UserName:">
                 <input type="password" id="pword" name="pword" placeholder="Password:">
                 <input class="btn btn-outline-success btn-sm" type="submit" value="Login">
@@ -47,7 +47,7 @@
                         </div>
                         <div class="card-body text-center">
                             <h1>
-                            Welcome to Best Cars dealership, home to the best cars in North America. We sell domestic and imported cars at the best prices.
+                            Welcome to Best Cars dealership, home to the best cars in America. We sell domestic and imported cars at the best prices.
                             </h1>
                         </div>
         </div>

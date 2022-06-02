@@ -19,22 +19,24 @@ logger = logging.getLogger(__name__)
 # Create your views here.
 
 
-# Create an `about` view to render a static about page
+# an `about` view to render a static about page
 def about(request):
     context = {}
     if request.method == 'GET':
         return render(request, 'djangoapp/about.html', context)
 
 
-# Create a `contact` view to return a static contact page
+# a `contact` view to return a static contact page
 def contact(request):
     context = {}
     if request.method == 'GET':                                     
         return render(request, 'djangoapp/contact.html', context)
 
-# Create a `login_request` view to handle sign in request
+# a `login_request` view to handle sign in request
 def login_request(request):
     context = {}
+    #  url = "need to add your url here https://666966.us-south.apigw.appdomain.cloud/api/dealership"
+    # dealerships = get_dealers_from_cf(url)
     if request.method == "POST":
         # Get username and password from request.POST dictionary
         username = request.POST['username']
@@ -47,6 +49,7 @@ def login_request(request):
             return redirect('/djangoapp/')
         else:
             # If not, return to login page again
+            context["message"]="Username or password is incorrect."
             return render(request, 'djangoapp/user_login.html', context)
     else:
         return render(request, 'djangoapp/user_login.html', context)
@@ -82,7 +85,7 @@ def registration_request(request):
             logger.debug("{} is new user".format(username))
         # If it is a new user
         if not user_exist:
-            # Create user in auth_user table
+            # user in auth_user table
             user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name,
                                             password=password)
             # Login the user and redirect to course list page
@@ -99,11 +102,12 @@ def get_dealerships(request):
         return render(request, 'djangoapp/index.html', context)
 
 
-# Create a `get_dealer_details` view to render the reviews of a dealer
+# `get_dealer_details` view to render the reviews of a dealer
 def get_dealer_details(request, dealer_id):
     context = {}
     if request.method == "GET":
-        # url = 'add IBMCloud url here...'
+        # url = 'https://quincy.mybluemix.net/'
+        # apikey= Add API key here
         context = {"reviews":  restapis.get_dealer_reviews_by_id_from_cf(url, dealer_id)}
         return render(request, 'djangoapp/dealer_details.html', context)
 

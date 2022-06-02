@@ -1,4 +1,5 @@
 requests
 Django
+# changed to 20.1.0 to get rid of error
 gunicorn==20.1.0
 Pillow==8.0.1
