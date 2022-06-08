@@ -105,7 +105,7 @@ def get_dealer_details(request, dealer_id):
     context = {}
     if request.method == "GET":
         url = 'https://quincy.mybluemix.net/'
-        # apikey= Add API key here
+        apikey="86LCWp_sISZS-VSr_bsvzVZ7gvcoWdmqFw1q7JvnpM5H"
         context = {"reviews":  restapis.get_dealer_reviews_by_id_from_cf(url, dealer_id)}
         return render(request, 'djangoapp/dealer_details.html', context)
 
