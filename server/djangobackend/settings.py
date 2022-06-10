@@ -82,6 +82,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        # will need to un-comment these for running the project with updated user and password
+        #'USER": 'b00ndo9761',
+        #'PASSWORD":'Mjg5OTktYjAwbmRv',
+        'HOST':'localhost',
+        'PORT':'5432',
     }
 }
 
