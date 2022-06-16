@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 # from .models import related models
-from . import models
+from .models import CarDealer, DealerReview, CarModel, CarMake
 # from .restapis import related methods
 from . import restapis
 from django.contrib.auth import login, logout, authenticate
@@ -94,17 +94,23 @@ def registration_request(request):
 
 # Update the `get_dealerships` view to render the index page with a list of dealerships
 def get_dealerships(request):
-    context = {}
     if request.method == "GET":
-        url = 'https://quincy.mybluemix.net/'
+        context = {}
+        url = "https://quincy.mybluemix.net"
+        apikey="ru0deFmnp7uzy3nB9B2CF72_GKbqH8uaLKzov9_Vwelr"
+        # get dealerships from URL
+        dealerships = get_dealers_from_cf(url)
+        context["dealership_list"] = dealerships
+        # Concat all dealer's short name
+        dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
+        # Return a list of dealer short name
         return render(request, 'djangoapp/index.html', context)
-
 
 # `get_dealer_details` view to render the reviews of a dealer
 def get_dealer_details(request, dealer_id):
     context = {}
     if request.method == "GET":
-        url = 'https://quincy.mybluemix.net/'
+        url = "https://quincy.mybluemix.net"
         apikey="86LCWp_sISZS-VSr_bsvzVZ7gvcoWdmqFw1q7JvnpM5H"
         context = {"reviews":  restapis.get_dealer_reviews_by_id_from_cf(url, dealer_id)}
         return render(request, 'djangoapp/dealer_details.html', context)

@@ -4,10 +4,10 @@ import logging
 # import related models here
 from .models import CarDealer
 from requests.auth import HTTPBasicAuth
-from ibm_watson import NaturalLanguageUnderstandingV1
-from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
-from ibm_watson.natural_language_understanding_V_1 \
-     import Features, SentimentOptions
+# from ibm_watson import NaturalLanguageUnderstandingV1
+#from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+#from ibm_watson.natural_language_understanding_V_1 \
+     #import Features, SentimentOptions
 
 
 # `get_request` to make HTTP GET requests
