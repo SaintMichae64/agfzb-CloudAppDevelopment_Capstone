@@ -7,7 +7,7 @@ env:
   IBM_CLOUD_REGION: eu-gb
   IBM_CLOUD_GROUP: CouchLizards
   IBM_CLOUD_SPACE: djangoserver-space
-  IBM_CLOUD_ORG: qfelthauser@my.apsu.edu
+  IBM_CLOUD_ORG: B00nDo9761@gmail.com
   MANIFEST_NAME: manifest.yml
   IBM_CLOUD_API: ${{secrets.IBM_CLOUD_API_KEY}}
 
