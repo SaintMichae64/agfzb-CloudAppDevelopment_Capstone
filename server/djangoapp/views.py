@@ -96,9 +96,10 @@ def registration_request(request):
 def get_dealerships(request):
     if request.method == "GET":
         context = {}
-        url = "https://quincy.mybluemix.net"
+        # below for the url ebter the 
+        url = "https://272ba856.us-south.apigw.appdomain.cloud/api"
         apikey="ru0deFmnp7uzy3nB9B2CF72_GKbqH8uaLKzov9_Vwelr"
-        # get dealerships from URL
+        # get dealerships from URL the IBM Cloud API (deprecated) page
         dealerships = get_dealers_from_cf(url)
         context["dealership_list"] = dealerships
         # Concat all dealer's short name
