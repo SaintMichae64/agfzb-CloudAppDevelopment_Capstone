@@ -76,12 +76,14 @@ def get_dealer_by_id_from_cf(url, dealerId):
                 review_obj = models.DealerReview(name = review["name"], 
                 dealership = review["dealership"], review = review["review"], purchase=review["purchase"],
                 purchase_date = review["purchase_date"], car_make = review['car_make'],
-                car_model = review['car_model'], car_year= review['car_year'], sentiment= "none")
+                car_model = review['car_model'], car_year= review['car_year'], sentiment= "none"),
+                full_name=dealer_doc["full_name"]
             except:
                 review_obj = models.DealerReview(name = review["name"], 
                 dealership = review["dealership"], review = review["review"], purchase=review["purchase"],
                 purchase_date = 'none', car_make = 'none',
-                car_model = 'none', car_year= 'none', sentiment= "none")
+                car_model = 'none', car_year= 'none', sentiment= "none"),
+                full_name=dealer_doc["full_name"]
                 
             review_obj.sentiment = analyze_review_sentiments(review_obj.review)
             print(review_obj.sentiment)
