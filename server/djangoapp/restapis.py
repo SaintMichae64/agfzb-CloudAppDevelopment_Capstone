@@ -70,7 +70,7 @@ def get_dealer_by_id_from_cf(url, dealerId):
     results = []
     json_result = get_request(url, dealerId=dealerId)
     if json_result:
-        reviews = json_result['entries']
+        dealers=json_result['body']
         for review in reviews:
             try:
                 review_obj = models.DealerReview(name = review["name"], 
