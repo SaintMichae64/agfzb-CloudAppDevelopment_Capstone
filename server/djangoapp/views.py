@@ -94,17 +94,13 @@ def registration_request(request):
 # Update the `get_dealerships` view to render the index page with a list of dealerships
 def get_dealerships(request):
     if request.method == "GET":
-        context = {}
-        # below for the url ebter the 
-        url = "https://272ba856.us-south.apigw.appdomain.cloud/api"
-        apikey="ru0deFmnp7uzy3nB9B2CF72_GKbqH8uaLKzov9_Vwelr"
-        # get dealerships from URL the IBM Cloud API (deprecated) page
+        url = "https://quincy.mybluemix.net/dealerships/dealer-get"
+        # Get dealers from the URL
         dealerships = get_dealers_from_cf(url)
-        context["dealership_list"] = dealerships
         # Concat all dealer's short name
         dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
         # Return a list of dealer short name
-        return render(request, 'djangoapp/index.html', context)
+        return HttpResponse(dealer_names)
 
 # `get_dealer_details` view to render the reviews of a dealer
 def get_dealer_details(request, dealer_id):

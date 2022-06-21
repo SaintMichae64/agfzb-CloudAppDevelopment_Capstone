@@ -43,15 +43,11 @@ def post_request(url, payload, **kwargs):
 # get_dealers_from_cf method to get dealers from a cloud function
 def get_dealers_from_cf(url, **kwargs):
     results = []
-    state = kwargs.get("state")
-    if state:
-        json_result = get_request(url, state=state)
-    else:
-        json_result = get_request(url)
-
+    # Call get_request with a URL parameter
+    json_result = get_request(url)
     if json_result:
         # Get the row list in JSON as dealers
-        dealers = json_result["body"]["rows"]
+        dealers = json_result["rows"]
         # For each dealer object
         for dealer in dealers:
             # Get its content in `doc` object
@@ -91,6 +87,48 @@ def get_dealer_by_id_from_cf(url, dealerId):
             results.append(review_obj)
 
     return results
+
+def get_dealer_reviews_from_cf(url, **kwargs):
+    results = []
+    dealerId = kwargs.get("dealerId")
+    json_result = get_request(url, dealerId=dealerId)
+
+    if json_result:
+        reviews = json_result["dealerReviews"]
+
+        for review in reviews:
+            sentiment = analyze_review_sentiments(review["review"])
+            if review["purchase"] is False:
+                review_obj = models.DealerReview(
+                name = review["name"],
+                purchase = review["purchase"],
+                dealership = review["dealership"],
+                review = review["review"],
+                purchase_date = None,
+                car_make = "",
+                car_model = "",
+                car_year = "",
+                sentiment = sentiment,
+                id = review["id"]
+                )
+                print(review_obj.sentiment)
+                results.append(review_obj)
+            else:
+                review_obj = models.DealerReview(
+                name = review["name"],
+                purchase = review["purchase"],
+                dealership = review["dealership"],
+                review = review["review"],
+                purchase_date = review["purchase_date"],
+                car_make = review["car_make"],
+                car_model = review["car_model"],
+                car_year = review["car_year"],
+                sentiment = sentiment,
+                id = review["id"]
+                )
+                print(review_obj.sentiment)
+            results.append(review_obj)
+    return results   
 
 # Create an `analyze_review_sentiments` method to call Watson NLU and analyze text
 def analyze_review_sentiments(text):
