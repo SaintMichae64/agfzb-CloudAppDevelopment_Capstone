@@ -8,7 +8,7 @@
         done
 
         echo "PostgreSQL started"
-    if
+    fi
 
     # Make migrations and migrate the database.
     echo "Making migrations and migrating the database. "
