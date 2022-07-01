@@ -1,11 +1,11 @@
 applications:
   - name: djangoapp
     routes:
-      - route: quincy-djangoapp.mybluemix.net
+      - route: CouchLizards-djangoapp.mybluemix.net
     memory: 128M
     buildpack: python_buildpack
   - name: djangoapp-nginx
     routes:
-      - route: quincy-djangoapp.mybluemix.net/static
+      - route: CouchLizards-djangoapp.mybluemix.net/static
     memory: 128M
     buildpack: staticfile_buildpack
