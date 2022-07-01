@@ -1,38 +1,105 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     {% load static %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+    <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-    <title>Dealership Review</title>
+
 </head>
-    <body>
-    {% include 'Navbar.html' %}
-    <div class="container">
-         <h1>Add Review</h1>
-         <form action="{% url 'djangoapp:add_review' dealer_id %}" method="POST">
-             {% csrf_token %}
-             <div class="form-group">
-                   
-                <label for="car">Select your car (model-make-year):</label>
-                <select name="car" id="car" class="form-select">
-                    {% for car in cars %}
-                        <option selected value={{car.id}}>{{car.name}}-{{car.car_make.name}}-{{ car.year|date:"Y" }}</option>
-                    {% endfor %} 
-                </select>
-                 <div class="form-group">
-                    <label>Vehicle Make/Model</label>
-                    <select name="car" id="car" class="form-select" required>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Dealership Review</a>
+            </div>
+            <ul class="nav navbar navbar-right">
+                <li class="pr-5">
+                    <a class="text-dark" href="{% url 'djangoapp:index'%}">Home</a>
+                </li>
+                <li class="pr-5">
+                    <a class="text-dark" href="{% url 'djangoapp:about' %}">About Us</a>
+                </li>
+                <li class="pr-5">
+                    <a class="text-dark" href="{% url 'djangoapp:contact' %}">Contact Us</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li>
+                    <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
+                    <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Username" name="username" >
+                            <input type="password" class="form-control" placeholder="Password" name="psw" >
+                            <button class="btn btn-primary" type="submit">Login</button>
+                            <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                        </div>
+                    </form>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+<div class="container-fluid">
+    <h3>Add a review about <b>{{dealer.full_name}}</b></h3>
+    <form action="{% url 'djangoapp:add_review' dealer.id%}" method="post">
+        <div class="form-group">
+
+              <div class="mb-3">
+                  <label for="content"><b>Enter the review content: </b></label>
+                  <textarea class="form-control" id="content" name="content" rows="2" required></textarea>
+              </div>
+
+              <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="purchasecheck" id="purchasecheck">
+                  <label class="form-check-label" for="purchasecheck">
+                      Has purchased the car from {{dealer.full_name}} ?
+                  </label>
+                  <label class="text-muted">(select purchased car information below if checked)</label>
+              </div>
+
+              <div class="mb-3">
+                <label for="car"><b>Select your car (model-make-year):</b></label> 
+                  <select name="car" id="car" class="form-select" required>
                       {% for car in cars %}
-                      <option selected value={{car.id}}>{{car.year}} {{car.car_make}} {{car.name}}</option>
+                      <option selected value={{car.id}}>{{car.name}}-{{car.make.name}}-{{ car.year|date:"Y" }}</option> 
                       {% endfor %}
-                    </select> 
-                    
-                </div>
+                  </select>
+              </div>
+
+              <div class="mb-3">
+                  <label for="purchasedate"><b>Select Your Purchase Date: </b></label>
+                  <input class="date-own form-control " style="width: 300px;" type="text" name="purchasedate" id="purchasedate">
+              </div>
+
+        </div>
+        {% csrf_token %}
+        <div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    </form>
+</div>
+</body>
+
+<script type="text/javascript">
+      $('.date-own').datepicker({
+         format: 'mm/dd/yyyy'
+       });
+ </script>
                 <div class="form-group">
                     <input class="form-check-input" type="checkbox" name="purchasecheck" id="purchasecheck">
                     <label class="form-check-label" for="purchasecheck">Purchased from dealer?</label>
