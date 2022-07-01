@@ -70,13 +70,19 @@
                               <p class="card-text">{{review.review}}</p>
                     </div>
                 </div>
-            </div>
+            
             {% endfor %}
+                
         </div>
     </div>
-</div>
+        
+    {% else% }
+        <p>No Reviews have been submitted.</p>
+    {% else %}
+        
+    </div>
 
-</body>
+  </body>
 
 
 </html>
