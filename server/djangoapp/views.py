@@ -31,7 +31,7 @@ def contact(request):
 # a `login_request` view to handle sign in request
 def login_request(request):
     context = {}
-    url = "https://quincy.mybluemix.net/"
+    url = "https://quincymybluemix.net/"
     # dealerships = get_dealers_from_cf(url)
     if request.method == "POST":
         # Get username and password from request.POST dictionary

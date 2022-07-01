@@ -1,11 +1,11 @@
 applications:
   - name: djangoapp
     routes:
-      - route: CouchLizards-djangoapp.mybluemix.net
+      - route: CouchLizards-djangoapp.us-south.cf.appdomain.cloud
     memory: 128M
     buildpack: python_buildpack
   - name: djangoapp-nginx
     routes:
-      - route: CouchLizards-djangoapp.mybluemix.net/static
+      - route: CouchLizards-djangoapp.us-south.cf.appdomain.cloud/static
     memory: 128M
     buildpack: staticfile_buildpack
