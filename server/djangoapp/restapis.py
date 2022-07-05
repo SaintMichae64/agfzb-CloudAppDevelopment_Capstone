@@ -132,8 +132,8 @@ def get_dealer_reviews_from_cf(url, **kwargs):
 
 # Create an `analyze_review_sentiments` method to call Watson NLU and analyze text
 def analyze_review_sentiments(text):
-     api_key = "uXjcBha35MGEJLotBIaK5ii950K2EBSbOvNtwxjgbbPo"
-     url = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/f13f64ab-07f4-41e3-8365-d9384a1b6f2a"
+     api_key = "kxyznQ9NtkhZQ_Ypz4iJ6OG7DVJzhvJbwFT9sp-PI3hA"
+     url = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/ec68dcd7-9bef-4e63-a8ac-9dd27c7f5574"
      texttoanalyze= text
      version = '2022-03-21'
      authenticator = IAMAuthenticator(api_key)
