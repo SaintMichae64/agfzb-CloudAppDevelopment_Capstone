@@ -31,7 +31,7 @@ def contact(request):
 # a `login_request` view to handle sign in request
 def login_request(request):
     context = {}
-    url = "https://quincymybluemix.net/"
+    url = "https://a7c81426.us-south.apigw.appdomain.cloud/dealership"
     # dealerships = get_dealers_from_cf(url)
     if request.method == "POST":
         # Get username and password from request.POST dictionary
@@ -47,16 +47,15 @@ def login_request(request):
             # If not, return to login page again
             context["message"]="Username or password is incorrect."
             return render(request, 'djangoapp/user_login.html', context)
-    else:
-        return render(request, 'djangoapp/user_login.html', context)
+   
 # `logout_request` view to handle sign out request
-def logout_request(request):
-    # Get the user object based on session id in request
-    print("Log out the user `{}`".format(request.user.username))
-    # Logout user in the request
-    logout(request)
-    # Redirect user back to course list view
-    return redirect('/djangoapp')
+ def logout_request(request):
+     # Get the user object based on session id in request
+     print("Log out the user `{}`".format(request.user.username))
+     # Logout user in the request
+     logout(request)
+     # Redirect user back to course list view
+     return redirect('/djangoapp')
 
 # `registration_request` view to handle sign up request
 def registration_request(request):
@@ -95,7 +94,7 @@ def registration_request(request):
 def get_dealerships(request):
     context = {}
     if request.method == "GET":
-        url = "https://quincy.mybluemix.net/dealerships/dealer-get"
+        url = "https://us-south.functions.appdomain.cloud/api/v1/web/6e4f3952-05b7-4c81-a53b-f1a5919d2d61/dealerships/dealerships"
         # Get dealers from the URL
         dealerships = get_dealers_from_cf(url)
         # Concat all dealer's short name
@@ -108,8 +107,7 @@ def get_dealerships(request):
 def get_dealer_details(request, dealer_id):
     context = {}
     if request.method == "GET":
-        url = "https://quincy.mybluemix.net"
-        apikey="86LCWp_sISZS-VSr_bsvzVZ7gvcoWdmqFw1q7JvnpM5H"
+        url = "https://us-south.functions.appdomain.cloud/api/v1/web/6e4f3952-05b7-4c81-a53b-f1a5919d2d61/reviews/reviews"
         dealer_details = get_dealer_reviews_from_cf(url, dealerId=dealer_id)
         reviewsdict = (vars(review) for review in dealer_details)
         context = {"Reviews":reviewsdict, "dealerId":dealer_id}
@@ -130,7 +128,7 @@ def add_review(request, dealer_id):
             return render(request, 'djangoapp/add_review.html', context)
         elif request.method == "POST":
             print(request.POST)
-            url = "https://d47998ca.us-south.apigw.appdomain.cloud/api/review"
+            url = "https://a7c81426.us-south.apigw.appdomain.cloud/dealer_reviews"
             review = {}
             
             review["id"] = get_reviews_count(url) + 1
