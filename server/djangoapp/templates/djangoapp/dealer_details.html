@@ -5,12 +5,7 @@
     <title>Dealership Review</title>
     {% load static %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
-    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+
 </head>
 
 <body>
@@ -50,7 +45,7 @@
         {% endfor %}
     {% endif %}
 
-    <h3>Reviews for <b>{{dealer.full_name}}</b></h3>
+    <h3>Reviews for Dealer_id <b>{{dealer.id}}</b></h3>
 
     <div class="container">
         <div class="card-columns">
@@ -75,19 +70,13 @@
                               <p class="card-text">{{review.review}}</p>
                     </div>
                 </div>
-            
+            </div>
             {% endfor %}
-                
         </div>
     </div>
-        
-    {% else% }
-        <p>No Reviews have been submitted.</p>
-    {% else %}
-        
-    </div>
+</div>
 
-  </body>
+</body>
 
 
 </html>
