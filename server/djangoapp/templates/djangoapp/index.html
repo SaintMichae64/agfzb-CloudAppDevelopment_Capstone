@@ -13,36 +13,39 @@
 
 </head>
 
-<body>
-<nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-        <div class="navbar-header">
-              <a class="navbar-brand" href="{% url 'djangoapp:about' %}">Dealership Review</a>
+    <body>
+        <!--Add a nav bar here -->
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'djangoapp:about' %}">Dealership Review</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                <li>
+                    <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
+                    <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Username" name="username" >
+                            <input type="password" class="form-control" placeholder="Password" name="psw" >
+                            <button class="btn btn-primary" type="submit">Login</button>
+                            <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                        </div>
+                    </form>
+                </li>
+                {% endif %}
+            </ul>
         </div>
-        <ul class="nav navbar-nav navbar-right">
-            {% if user.is_authenticated %}
-            <li>
-                <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
-                <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
-            </li>
-            {% else %}
-            <li>
-                <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
-                    {% csrf_token %}
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Username" name="username" >
-                        <input type="password" class="form-control" placeholder="Username" name="psw" >
-                        <button class="btn btn-primary" type="submit">Login</button>
-                        <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
-                    </div>
-                </form>
-            </li>
-            {% endif %}
-        </ul>
-    </div>
-</nav>
+    </nav>
+        
 
-<div class="container-fluid">
+    <!--Add a dealer table here -->
+    <div class="container-fluid">
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-warning" role="alert">{{ message }}</div>
@@ -54,7 +57,7 @@
         <thead>
             <tr>
                 <th data-field="id">ID</th>
-                <th data-field="full_name">Dealer Name</th>
+                
                 <th data-field="city">City</th>
                 <th data-field="address">Address</th>
                 <th data-field="zip">Zip</th>
@@ -64,8 +67,8 @@
          <tbody>
             {% for dealer in dealership_list %}
                 <tr>
-                    <td>{{dealer.id}}</td>
-                    <td><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}}</a></td>   
+                    
+                    <td><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.id}}</a></td>
                     <td>{{dealer.city}}</td>
                     <td>{{dealer.address}}</td>
                     <td>{{dealer.zip}}</td>
@@ -89,5 +92,9 @@
     $('#table').bootstrapTable()
   })
 </script>
+
+</html>
+
+    </body>
 
 </html>
