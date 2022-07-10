@@ -27,6 +27,6 @@ spec:
         - containerPort: 8000
           protocol: TCP
       restartPolicy: Always
-      imagePullSecrets: Always
+      imagePullSecrets:
       - name: the-secret
   replicas: 1
