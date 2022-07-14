@@ -87,7 +87,7 @@ def get_dealership_bystate_from_cf(url, dealerId):
 
     return results
 
-def get_reviews_from_cf(url, **kwargs):
+def get_review_from_cf(url, **kwargs):
     results = []
     dealerId = kwargs.get("dealerId")
     json_result = get_request(url, dealerId=dealerId)
