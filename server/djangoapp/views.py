@@ -29,7 +29,7 @@ def get_dealerships(request):
     if request.method == "GET":
         context = {}
         url = "https://7eb5862d.us-south.apigw.appdomain.cloud/api/dealership"
-        dealerships = get_dealers_from_cf(url)
+        dealerships = get_dealerships_from_cf(url)
         context["dealership_list"] = dealerships
         return render(request, 'djangoapp/index.html', context)
 
@@ -42,7 +42,7 @@ def get_dealership_bystate(request, id):
         context["dealer"] = dealer
     
         review_url = "https://14b3146c.us-south.apigw.appdomain.cloud/api/reviews"
-        reviews = review_from_cf(review_url, id=id)
+        reviews = get_review_from_cf(review_url, id=id)
         print(reviews)
         context["reviews"] = reviews
         
@@ -52,7 +52,7 @@ def get_dealership_bystate(request, id):
 def add_review(request, id):
     context = {}
     dealer_url = "https://7eb5862d.us-south.apigw.appdomain.cloud/api/dealership"
-    dealer = dealership_from_cf(dealer_url, id=id)
+    dealer = get_dealerships_from_cf(dealer_url, id=id)
     context["dealer"] = dealer
     if request.method == 'GET':
         # Get cars for the dealer
