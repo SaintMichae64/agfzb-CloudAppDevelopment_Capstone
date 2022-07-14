@@ -13,7 +13,7 @@ class CarMake(models.Model):
 
 class CarModel(models.Model):
     id = models.IntegerField(default=1,primary_key=True)
-  name = models.CharField(null=False, max_length=100, default='Car')
+    name = models.CharField(null=False, max_length=100, default='Car')
    
     SEDAN = 'Sedan'
     SUV = 'SUV'
