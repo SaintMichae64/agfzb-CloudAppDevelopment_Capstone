@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import CarModel, CarMake, CarDealer, DealerReview, ReviewPost
-from .restapis import get_dealers_from_cf, get_dealer_by_id_from_cf, get_dealer_reviews_from_cf, post_request
+from .restapis import get_dealerships_cf, get_dealership_bystate_from_cf, review_from_cf, post_review_from_cf
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
@@ -34,15 +34,15 @@ def get_dealerships(request):
         return render(request, 'djangoapp/index.html', context)
 
 
-def get_dealer_details(request, id):
+def get_dealership_bystate(request, id):
     if request.method == "GET":
         context = {}
         dealer_url = "https://7eb5862d.us-south.apigw.appdomain.cloud/api/get_dealership_bystate"
-        dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
+        dealer = get_dealership_bystate_from_cf(dealer_url, id=id)
         context["dealer"] = dealer
     
         review_url = "https://14b3146c.us-south.apigw.appdomain.cloud/api/reviews"
-        reviews = get_dealer_reviews_from_cf(review_url, id=id)
+        reviews = review_from_cf(review_url, id=id)
         print(reviews)
         context["reviews"] = reviews
         
@@ -51,8 +51,8 @@ def get_dealer_details(request, id):
 
 def add_review(request, id):
     context = {}
-    dealer_url = "https://7eb5862d.us-south.apigw.appdomain.cloud/api/post_review"
-    dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
+    dealer_url = "https://7eb5862d.us-south.apigw.appdomain.cloud/api/dealership"
+    dealer = dealership_from_cf(dealer_url, id=id)
     context["dealer"] = dealer
     if request.method == 'GET':
         # Get cars for the dealer
