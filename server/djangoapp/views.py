@@ -51,8 +51,8 @@ def get_dealerships(request, id):
 
 def add_review(request, id):
     context = {}
-    dealer_url = "https://7eb5862d.us-south.apigw.appdomain.cloud/api/dealership"
-    dealer = get_dealerships_from_cf(dealer_url, id=id)
+    dealer_url = "https://7eb5862d.us-south.apigw.appdomain.cloud/api/post-review/post-review"
+    dealer = get_post_review_from_cf(dealer_url, id=id)
     context["dealer"] = dealer
     if request.method == 'GET':
         # Get cars for the dealer
