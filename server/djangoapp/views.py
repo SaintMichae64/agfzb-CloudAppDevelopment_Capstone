@@ -28,7 +28,7 @@ def contact(request):
 def get_dealerships(request):
     if request.method == "GET":
         context = {}
-        url = "https://7eb5862d.us-south.apigw.appdomain.cloud/api/dealership"
+        url = "https://7eb5862d.us-south.apigw.appdomain.cloud/api/dealership/dealership"
         dealerships = get_dealerships_from_cf(url)
         context["dealership_list"] = dealerships
         return render(request, 'djangoapp/index.html', context)
