@@ -42,7 +42,7 @@ def get_dealership_bystate(request, id):
         context["dealer"] = dealer
     
         review_url = "https://7eb5862d.us-south.apigw.appdomain.cloud/api/review"
-        reviews = get_review_from_cf(review_url, id=id)
+        reviews = get-review_from_cf(review_url, id=id)
         print(reviews)
         context["reviews"] = reviews
         
