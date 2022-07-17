@@ -41,7 +41,7 @@ def post_request(url, payload, **kwargs):
 
 
 # get_dealers_from_cf method to get dealers from a cloud function
-def get_dealerships_from_cf(url, **kwargs):
+def get_all_dealerships_from_cf(url, **kwargs):
     results = []
     # Call get_request with a URL parameter
     json_result = get_request(url)
@@ -61,7 +61,7 @@ def get_dealerships_from_cf(url, **kwargs):
     return results
 
 # get_dealer_reviews_from_cf method to get reviews by dealer id from a cloud function
-def get_dealerships_cf(url, dealerId):
+def get_allReviews_byID_from_cf(url, dealerId):
     results = []
     json_result = get_request(url, dealerId=dealerId)
     if json_result:
@@ -87,7 +87,7 @@ def get_dealerships_cf(url, dealerId):
 
     return results
 
-def get_reviews_from_cf(url, **kwargs):
+def post_review_from_cf(url, **kwargs):
     results = []
     dealerId = kwargs.get("dealerId")
     json_result = get_request(url, dealerId=dealerId)
