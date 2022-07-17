@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import CarModel, CarMake, CarDealer, DealerReview, ReviewPost
-from .restapis import get_all_dealerships_from_cf, get_allReviews_byID_from_cf, get_post_review_from_cf, get_request, post_request
+from .restapis import get_all_dealerships_from_cf, get_allReviews_byID_from_cf, get_request, post_request
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
@@ -25,7 +25,7 @@ def contact(request):
     return render(request, 'djangoapp/contact.html', context)
 
 
-def get_all_dealerships(request, id):
+def get_all_dealerships(request):
     if request.method == "GET":
         context = {}
         url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/dealership/dealership"
@@ -34,10 +34,11 @@ def get_all_dealerships(request, id):
         return render(request, 'djangoapp/index.html', context)
 
 
-def get_all_dealerships(request, id):
+def get_all_dealerships(request):
     if request.method == "GET":
         context = {}
         dealer_url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/dealership/dealership"
+        apikey="Wl-LVg_RksIpavBq86axjT35O7OauwxwYDjUbkm52wEk"
         dealer = get_all_dealerships_from_cf(dealer_url, id=id)
         context["dealer"] = dealer
             
