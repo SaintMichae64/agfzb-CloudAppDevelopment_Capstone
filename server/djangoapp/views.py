@@ -39,7 +39,7 @@ def get_all_dealerships(request):
         context = {}
         dealer_url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/dealership/dealership"
         apikey="Wl-LVg_RksIpavBq86axjT35O7OauwxwYDjUbkm52wEk"
-        dealer = get_allReviews-byID(dealer_url, id=id)
+        dealer = get_allReviews_byID(dealer_url, id=id)
         context["dealer"] = dealer
             
         review_url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/get_review/review"
