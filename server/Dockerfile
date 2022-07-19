@@ -4,7 +4,7 @@ ENV PYTHONBUFFERED 1
 ENV PYTHONWRITEBYTECODE 1
 
 RUN apt-get update \
-        && apt-get install -y netcat
+    && apt-get install -y netcat
 
 ENV APP=/app
 
