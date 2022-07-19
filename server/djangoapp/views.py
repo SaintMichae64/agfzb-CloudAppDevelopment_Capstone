@@ -28,7 +28,7 @@ def contact(request):
 def get_dealerships(request):
     if request.method == "GET":
         context = {}
-        url = "your get dealerships Node.JS API endpoint"
+        url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/dealership/dealership"
         dealerships = get_dealers_from_cf(url)
         context["dealership_list"] = dealerships
         return render(request, 'djangoapp/index.html', context)
@@ -37,11 +37,11 @@ def get_dealerships(request):
 def get_dealer_details(request, id):
     if request.method == "GET":
         context = {}
-        dealer_url = "your get dealerships Node.JS API endpoint"
+        dealer_url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/dealership/dealership"
         dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
         context["dealer"] = dealer
     
-        review_url = "your get reviews Python API endpoint"
+        review_url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/get_review/review"
         reviews = get_dealer_reviews_from_cf(review_url, id=id)
         print(reviews)
         context["reviews"] = reviews
@@ -51,7 +51,7 @@ def get_dealer_details(request, id):
 
 def add_review(request, id):
     context = {}
-    dealer_url = "your get dealerships Node.JS API endpoint"
+    dealer_url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/dealership/dealership"
     dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
     context["dealer"] = dealer
     if request.method == 'GET':
@@ -84,7 +84,7 @@ def add_review(request, id):
 
             new_payload = {}
             new_payload["review"] = payload
-            review_post_url = "your post reviews Python API endpoint"
+            review_post_url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/post_review/post_review"
             post_request(review_post_url, new_payload, id=id)
         return redirect("djangoapp:dealer_details", id=id)
     
