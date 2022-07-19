@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import CarModel, CarMake, CarDealer, DealerReview, ReviewPost
-from . import restapis
+from .restapis import get_dealers_from_cf, get_dealer_by_id_from_cf, get_dealer_reviews_from_cf, post_request
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
@@ -25,25 +25,24 @@ def contact(request):
     return render(request, 'djangoapp/contact.html', context)
 
 
-def get_all_dealerships(request):
+def get_dealerships(request):
     if request.method == "GET":
         context = {}
-        url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/dealership/dealership"
-        dealerships = get_all_dealerships_from_cf(dealer_url, id=id)
+        url = "your get dealerships Node.JS API endpoint"
+        dealerships = get_dealers_from_cf(url)
         context["dealership_list"] = dealerships
         return render(request, 'djangoapp/index.html', context)
 
 
-def get_all_dealerships(request):
+def get_dealer_details(request, id):
     if request.method == "GET":
         context = {}
-        dealer_url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/dealership/dealership"
-        apikey="Wl-LVg_RksIpavBq86axjT35O7OauwxwYDjUbkm52wEk"
-        dealer = get_allReviews_byID(dealer_url, id=id)
+        dealer_url = "your get dealerships Node.JS API endpoint"
+        dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
         context["dealer"] = dealer
-            
-        review_url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/get_review/review"
-        reviews = get_allReviews_byID_from_cf(review_url, id=id)
+    
+        review_url = "your get reviews Python API endpoint"
+        reviews = get_dealer_reviews_from_cf(review_url, id=id)
         print(reviews)
         context["reviews"] = reviews
         
@@ -52,12 +51,12 @@ def get_all_dealerships(request):
 
 def add_review(request, id):
     context = {}
-    dealer_url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/dealership/dealership"
-    dealer = get_post_review_from_cf(dealer_url, id=id)
+    dealer_url = "your get dealerships Node.JS API endpoint"
+    dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
     context["dealer"] = dealer
     if request.method == 'GET':
         # Get cars for the dealer
-        cars = CarModel.objects.filter(id=id)
+        cars = CarModel.objects.all()
         print(cars)
         context["cars"] = cars
         
@@ -85,11 +84,11 @@ def add_review(request, id):
 
             new_payload = {}
             new_payload["review"] = payload
-            review_post_url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/post_review/post_review"
+            review_post_url = "your post reviews Python API endpoint"
             post_request(review_post_url, new_payload, id=id)
         return redirect("djangoapp:dealer_details", id=id)
-
-
+    
+    
 def registration_request(request):
     context = {}
     if request.method == 'GET':
@@ -117,7 +116,7 @@ def registration_request(request):
         else:
             messages.warning(request, "The user already exists.")
             return redirect("djangoapp:registration")
-
+        
 
 def login_request(request):
     if request.method == "POST":
@@ -135,4 +134,4 @@ def login_request(request):
 
 def logout_request(request):
     logout(request)
-    return redirect('djangoapp:index')
+    return redirect('djangoapp:index')        
