@@ -61,7 +61,7 @@ def get_dealerships(url, **kwargs):
     return results
 
 # get_dealer_reviews_from_cf method to get reviews by dealer id from a cloud function
-def get_dealer_reviews(url, dealerId):
+def get_dealer_reviews_from_cf(url, dealerId):
     results = []
     json_result = get_request(url, dealerId=dealerId)
     if json_result:
