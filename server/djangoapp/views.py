@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import CarModel, CarMake, CarDealer, DealerReview, ReviewPost
-from .restapis import get_dealers_from_cf, get_dealer_by_id_from_cf, get_dealer_reviews_from_cf, post_request
+from .restapis import get_dealerships, get_dealer_by_id_from_cf, get_dealer_reviews_from_cf, post_request
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
@@ -29,7 +29,7 @@ def get_dealerships(request):
     if request.method == "GET":
         context = {}
         url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/dealership"
-        dealerships = get_dealers_from_cf(url)
+        dealerships = get_dealerships(url)
         context["dealership_list"] = dealerships
         return render(request, 'djangoapp/index.html', context)
 
