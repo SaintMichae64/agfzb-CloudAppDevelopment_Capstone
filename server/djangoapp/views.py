@@ -42,7 +42,7 @@ def get_dealer_details(request, id):
         context["dealer"] = dealer
     
         review_url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/get_review"
-        reviews = get_allReviews-byID(review_url, id=id)
+        reviews = get_allReviews_byID(review_url, id=id)
         print(reviews)
         context["reviews"] = reviews
         
