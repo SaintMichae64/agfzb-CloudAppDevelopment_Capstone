@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import CarModel, CarMake, CarDealer, DealerReview, ReviewPost
-from .restapis import get_dealerships, get_dealer_details, get_dealer_reviews, post_request 
+from .restapis import get_dealerships, get_dealer_details, post_request 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
