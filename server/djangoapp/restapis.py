@@ -41,7 +41,7 @@ def post_request(url, payload, **kwargs):
 
 
 # get_dealers_from_cf method to get dealers from a cloud function
-def get_dealerships(url, **kwargs):
+def get_dealership(url, **kwargs):
     results = []
     # Call get_request with a URL parameter
     json_result = get_request(url)
