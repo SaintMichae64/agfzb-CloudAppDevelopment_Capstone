@@ -31,10 +31,11 @@ def contact(request):
 
 
 def get_dealerships(request):
+    global dealership
     if request.method == "GET":
         context = {}
         url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/dealership"
-        dealerships = dealerships(url)
+        dealerships = dealership(url)
         context["dealership_list"] = dealerships
         return render(request, 'djangoapp/index.html', context)
 
