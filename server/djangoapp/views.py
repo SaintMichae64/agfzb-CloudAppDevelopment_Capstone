@@ -30,7 +30,7 @@ def contact(request):
     return render(request, 'djangoapp/contact.html', context)
 
 
-def get_dealerships(request):
+def get_dealership(request):
     global dealership
     if request.method == "GET":
         context = {}
