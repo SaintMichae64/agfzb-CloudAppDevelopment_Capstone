@@ -7,8 +7,13 @@ from .restapis import get_dealership, get_dealer_details, post_request
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
+from django.db import models
+from django.core import serializers
+from django.utils.timezone import now
+import uuid
 import logging
 import json
+
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
