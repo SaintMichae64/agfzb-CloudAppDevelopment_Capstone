@@ -31,11 +31,11 @@ def contact(request):
 
 
 def get_dealership(request):
-    global dealership
+    #global dealership
     if request.method == "GET":
         context = {}
         url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/dealership"
-        dealerships = dealership(url)
+        dealerships = get_dealership(url)
         context["dealership_list"] = dealerships
         return render(request, 'djangoapp/index.html', context)
 
@@ -44,7 +44,7 @@ def get_dealer_details(request, id):
     if request.method == "GET":
         context = {}
         dealer_url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/dealership"
-        dealer = get_dealership(dealer_url, id=id)
+        dealer = get_dealer_details(dealer_url, id=id)
         context["dealer"] = dealer
     
         review_url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/get_review"
