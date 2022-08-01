@@ -35,7 +35,7 @@ def get_dealership(request):
     if request.method == "GET":
         context = {}
         url = "https://2d6871f8.us-south.apigw.appdomain.cloud/api/dealership"
-        dealerships = get_dealership(url)
+        dealerships = dealership(url)
         context["dealership_list"] = dealerships
         return render(request, 'djangoapp/index.html', context)
 
