@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
         # will need to un-comment these for running the project with updated user and password
         'USER': 'b00ndo9761',
-        'PASSWORD':'NTY2My1iMDBuZG85',
+        'PASSWORD':'MTY2OTktYjAwbmRv',
         'HOST':'localhost',
         'PORT':'5432',
     }
